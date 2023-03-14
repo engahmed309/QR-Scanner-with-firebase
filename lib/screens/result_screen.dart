@@ -1,14 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:qr_scanner/screens/scanner_screen.dart';
-import 'package:http/http.dart' as http;
 
-class ResultScreen extends StatefulWidget {
-  @override
-  State<ResultScreen> createState() => _ResultScreenState();
+class ResultScreen extends StatelessWidget {
   String code;
   final Function() closeScreen;
   String checkResult;
@@ -20,17 +13,14 @@ class ResultScreen extends StatefulWidget {
     required this.checkResult,
     required this.isMatched,
   });
-}
 
-class _ResultScreenState extends State<ResultScreen> {
-  String codeId = "No matching found !";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              widget.closeScreen();
+              closeScreen();
               Navigator.of(context).pop();
             },
             icon: const Icon(
@@ -49,31 +39,31 @@ class _ResultScreenState extends State<ResultScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             QrImage(
-              data: widget.code,
+              data: code,
               size: 150,
               version: QrVersions.auto,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
-              "Qr RESULT : ${widget.code}",
+              "Qr RESULT : $code",
               style: TextStyle(color: Colors.amber, fontSize: 20),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            widget.isMatched
+            isMatched
                 ? Text(
-                    "Check result : ${widget.checkResult}",
-                    style: TextStyle(
+                    "Check result : $checkResult",
+                    style: const TextStyle(
                         color: Colors.green,
                         fontSize: 24,
                         fontWeight: FontWeight.bold),
                   )
                 : Text(
-                    "Check result : ${widget.checkResult}",
-                    style: TextStyle(
+                    "Check result : $checkResult",
+                    style: const TextStyle(
                         color: Colors.red,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),

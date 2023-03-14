@@ -1,19 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:qr_scanner/main.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:qr_scanner/screens/result_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:http/http.dart' as http;
+
+import '/screens/result_screen.dart';
 
 class ScannerScreen extends StatefulWidget {
-  const ScannerScreen({super.key});
-
   @override
   State<ScannerScreen> createState() => _ScannerScreenState();
 }
 
 class _ScannerScreenState extends State<ScannerScreen> {
+  String chekResult = "";
   bool isScanCompleted = false;
   bool isMatched = false;
   void closeScreen() {
@@ -21,42 +20,40 @@ class _ScannerScreenState extends State<ScannerScreen> {
     isMatched = false;
   }
 
-  String chekResult = "";
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "QR Scanner",
           style: TextStyle(fontSize: 26, color: Colors.tealAccent),
         ),
       ),
       body: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         width: double.infinity,
         child: Column(
           children: [
+            //Some guiding text
             Expanded(
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
-                      "Place the code in the area",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Scannig Will Start Automatically",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "Place the code in the area",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Scannig Will Start Automatically",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
               ),
             ),
+            //Implementing scanner
             Expanded(
               flex: 3,
               child: Padding(
@@ -81,7 +78,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                         });
                       } else {
                         setState(() {
-                          chekResult = "Sorry,did not match !";
+                          chekResult = "No matching found!";
                         });
                       }
                       Navigator.of(context).push(

@@ -137,7 +137,7 @@ packages:
     source: hosted
     version: "1.8.0"
   mobile_scanner:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: mobile_scanner
       sha256: "4045e8441e21f1fb8998a76fbffd054510dd3a3b1dee55c7c9a2083eee687345"
